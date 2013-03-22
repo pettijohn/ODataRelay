@@ -1,0 +1,570 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices m:DataServiceVersion="1.0" m:MaxDataServiceVersion="3.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="ODataRelay.PublicNorthwind" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+      <EntityType Name="Category">
+        <Key>
+          <PropertyRef Name="CategoryID" />
+        </Key>
+        <Property Name="CategoryID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CategoryName" Type="Edm.String" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Picture" Type="Edm.Binary" />
+        <NavigationProperty Name="Products" Relationship="ODataRelay.PublicNorthwind.Category_Products" ToRole="Products" FromRole="Category" />
+      </EntityType>
+      <EntityType Name="CustomerDemographic">
+        <Key>
+          <PropertyRef Name="CustomerTypeID" />
+        </Key>
+        <Property Name="CustomerTypeID" Type="Edm.String" Nullable="false" />
+        <Property Name="CustomerDesc" Type="Edm.String" />
+        <NavigationProperty Name="Customers" Relationship="ODataRelay.PublicNorthwind.CustomerDemographic_Customers" ToRole="Customers" FromRole="CustomerDemographic" />
+      </EntityType>
+      <EntityType Name="Customer">
+        <Key>
+          <PropertyRef Name="CustomerID" />
+        </Key>
+        <Property Name="CustomerID" Type="Edm.String" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" />
+        <Property Name="ContactName" Type="Edm.String" />
+        <Property Name="ContactTitle" Type="Edm.String" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <NavigationProperty Name="Orders" Relationship="ODataRelay.PublicNorthwind.Customer_Orders" ToRole="Orders" FromRole="Customer" />
+        <NavigationProperty Name="CustomerDemographics" Relationship="ODataRelay.PublicNorthwind.Customer_CustomerDemographics" ToRole="CustomerDemographics" FromRole="Customer" />
+      </EntityType>
+      <EntityType Name="Employee">
+        <Key>
+          <PropertyRef Name="EmployeeID" />
+        </Key>
+        <Property Name="EmployeeID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="LastName" Type="Edm.String" />
+        <Property Name="FirstName" Type="Edm.String" />
+        <Property Name="Title" Type="Edm.String" />
+        <Property Name="TitleOfCourtesy" Type="Edm.String" />
+        <Property Name="BirthDate" Type="Edm.DateTime" />
+        <Property Name="HireDate" Type="Edm.DateTime" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="HomePhone" Type="Edm.String" />
+        <Property Name="Extension" Type="Edm.String" />
+        <Property Name="Photo" Type="Edm.Binary" />
+        <Property Name="Notes" Type="Edm.String" />
+        <Property Name="ReportsTo" Type="Edm.Int32" />
+        <Property Name="PhotoPath" Type="Edm.String" />
+        <NavigationProperty Name="Employees1" Relationship="ODataRelay.PublicNorthwind.Employee_Employees1" ToRole="Employees1" FromRole="Employee" />
+        <NavigationProperty Name="Employee1" Relationship="ODataRelay.PublicNorthwind.Employee_Employee1" ToRole="Employee1" FromRole="Employee" />
+        <NavigationProperty Name="Orders" Relationship="ODataRelay.PublicNorthwind.Employee_Orders" ToRole="Orders" FromRole="Employee" />
+        <NavigationProperty Name="Territories" Relationship="ODataRelay.PublicNorthwind.Employee_Territories" ToRole="Territories" FromRole="Employee" />
+      </EntityType>
+      <EntityType Name="Order_Detail">
+        <Key>
+          <PropertyRef Name="OrderID" />
+          <PropertyRef Name="ProductID" />
+        </Key>
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="Quantity" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Discount" Type="Edm.Single" Nullable="false" />
+        <NavigationProperty Name="Order" Relationship="ODataRelay.PublicNorthwind.Order_Detail_Order" ToRole="Order" FromRole="Order_Detail" />
+        <NavigationProperty Name="Product" Relationship="ODataRelay.PublicNorthwind.Order_Detail_Product" ToRole="Product" FromRole="Order_Detail" />
+      </EntityType>
+      <EntityType Name="Order">
+        <Key>
+          <PropertyRef Name="OrderID" />
+        </Key>
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CustomerID" Type="Edm.String" />
+        <Property Name="EmployeeID" Type="Edm.Int32" />
+        <Property Name="OrderDate" Type="Edm.DateTime" />
+        <Property Name="RequiredDate" Type="Edm.DateTime" />
+        <Property Name="ShippedDate" Type="Edm.DateTime" />
+        <Property Name="ShipVia" Type="Edm.Int32" />
+        <Property Name="Freight" Type="Edm.Decimal" />
+        <Property Name="ShipName" Type="Edm.String" />
+        <Property Name="ShipAddress" Type="Edm.String" />
+        <Property Name="ShipCity" Type="Edm.String" />
+        <Property Name="ShipRegion" Type="Edm.String" />
+        <Property Name="ShipPostalCode" Type="Edm.String" />
+        <Property Name="ShipCountry" Type="Edm.String" />
+        <NavigationProperty Name="Customer" Relationship="ODataRelay.PublicNorthwind.Order_Customer" ToRole="Customer" FromRole="Order" />
+        <NavigationProperty Name="Employee" Relationship="ODataRelay.PublicNorthwind.Order_Employee" ToRole="Employee" FromRole="Order" />
+        <NavigationProperty Name="Order_Details" Relationship="ODataRelay.PublicNorthwind.Order_Order_Details" ToRole="Order_Details" FromRole="Order" />
+        <NavigationProperty Name="Shipper" Relationship="ODataRelay.PublicNorthwind.Order_Shipper" ToRole="Shipper" FromRole="Order" />
+      </EntityType>
+      <EntityType Name="Product">
+        <Key>
+          <PropertyRef Name="ProductID" />
+        </Key>
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" />
+        <Property Name="SupplierID" Type="Edm.Int32" />
+        <Property Name="CategoryID" Type="Edm.Int32" />
+        <Property Name="QuantityPerUnit" Type="Edm.String" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" />
+        <Property Name="UnitsInStock" Type="Edm.Int16" />
+        <Property Name="UnitsOnOrder" Type="Edm.Int16" />
+        <Property Name="ReorderLevel" Type="Edm.Int16" />
+        <Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" />
+        <NavigationProperty Name="Category" Relationship="ODataRelay.PublicNorthwind.Product_Category" ToRole="Category" FromRole="Product" />
+        <NavigationProperty Name="Order_Details" Relationship="ODataRelay.PublicNorthwind.Product_Order_Details" ToRole="Order_Details" FromRole="Product" />
+        <NavigationProperty Name="Supplier" Relationship="ODataRelay.PublicNorthwind.Product_Supplier" ToRole="Supplier" FromRole="Product" />
+      </EntityType>
+      <EntityType Name="Region">
+        <Key>
+          <PropertyRef Name="RegionID" />
+        </Key>
+        <Property Name="RegionID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="RegionDescription" Type="Edm.String" />
+        <NavigationProperty Name="Territories" Relationship="ODataRelay.PublicNorthwind.Region_Territories" ToRole="Territories" FromRole="Region" />
+      </EntityType>
+      <EntityType Name="Shipper">
+        <Key>
+          <PropertyRef Name="ShipperID" />
+        </Key>
+        <Property Name="ShipperID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <NavigationProperty Name="Orders" Relationship="ODataRelay.PublicNorthwind.Shipper_Orders" ToRole="Orders" FromRole="Shipper" />
+      </EntityType>
+      <EntityType Name="Supplier">
+        <Key>
+          <PropertyRef Name="SupplierID" />
+        </Key>
+        <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" />
+        <Property Name="ContactName" Type="Edm.String" />
+        <Property Name="ContactTitle" Type="Edm.String" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <Property Name="HomePage" Type="Edm.String" />
+        <NavigationProperty Name="Products" Relationship="ODataRelay.PublicNorthwind.Supplier_Products" ToRole="Products" FromRole="Supplier" />
+      </EntityType>
+      <EntityType Name="Territory">
+        <Key>
+          <PropertyRef Name="TerritoryID" />
+        </Key>
+        <Property Name="TerritoryID" Type="Edm.String" Nullable="false" />
+        <Property Name="TerritoryDescription" Type="Edm.String" />
+        <Property Name="RegionID" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="Region" Relationship="ODataRelay.PublicNorthwind.Territory_Region" ToRole="Region" FromRole="Territory" />
+        <NavigationProperty Name="Employees" Relationship="ODataRelay.PublicNorthwind.Territory_Employees" ToRole="Employees" FromRole="Territory" />
+      </EntityType>
+      <EntityType Name="Alphabetical_list_of_product">
+        <Key>
+          <PropertyRef Name="ProductID" />
+          <PropertyRef Name="ProductName" />
+          <PropertyRef Name="Discontinued" />
+          <PropertyRef Name="CategoryName" />
+        </Key>
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+        <Property Name="SupplierID" Type="Edm.Int32" />
+        <Property Name="CategoryID" Type="Edm.Int32" />
+        <Property Name="QuantityPerUnit" Type="Edm.String" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" />
+        <Property Name="UnitsInStock" Type="Edm.Int16" />
+        <Property Name="UnitsOnOrder" Type="Edm.Int16" />
+        <Property Name="ReorderLevel" Type="Edm.Int16" />
+        <Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="CategoryName" Type="Edm.String" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Category_Sales_for_1997">
+        <Key>
+          <PropertyRef Name="CategoryName" />
+        </Key>
+        <Property Name="CategoryName" Type="Edm.String" Nullable="false" />
+        <Property Name="CategorySales" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="Current_Product_List">
+        <Key>
+          <PropertyRef Name="ProductID" />
+          <PropertyRef Name="ProductName" />
+        </Key>
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Customer_and_Suppliers_by_City">
+        <Key>
+          <PropertyRef Name="CompanyName" />
+          <PropertyRef Name="Relationship" />
+        </Key>
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="ContactName" Type="Edm.String" />
+        <Property Name="Relationship" Type="Edm.String" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Invoice">
+        <Key>
+          <PropertyRef Name="CustomerName" />
+          <PropertyRef Name="Salesperson" />
+          <PropertyRef Name="OrderID" />
+          <PropertyRef Name="ShipperName" />
+          <PropertyRef Name="ProductID" />
+          <PropertyRef Name="ProductName" />
+          <PropertyRef Name="UnitPrice" />
+          <PropertyRef Name="Quantity" />
+          <PropertyRef Name="Discount" />
+        </Key>
+        <Property Name="ShipName" Type="Edm.String" />
+        <Property Name="ShipAddress" Type="Edm.String" />
+        <Property Name="ShipCity" Type="Edm.String" />
+        <Property Name="ShipRegion" Type="Edm.String" />
+        <Property Name="ShipPostalCode" Type="Edm.String" />
+        <Property Name="ShipCountry" Type="Edm.String" />
+        <Property Name="CustomerID" Type="Edm.String" />
+        <Property Name="CustomerName" Type="Edm.String" Nullable="false" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Salesperson" Type="Edm.String" Nullable="false" />
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="OrderDate" Type="Edm.DateTime" />
+        <Property Name="RequiredDate" Type="Edm.DateTime" />
+        <Property Name="ShippedDate" Type="Edm.DateTime" />
+        <Property Name="ShipperName" Type="Edm.String" Nullable="false" />
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="Quantity" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Discount" Type="Edm.Single" Nullable="false" />
+        <Property Name="ExtendedPrice" Type="Edm.Decimal" />
+        <Property Name="Freight" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="Order_Details_Extended">
+        <Key>
+          <PropertyRef Name="OrderID" />
+          <PropertyRef Name="ProductID" />
+          <PropertyRef Name="ProductName" />
+          <PropertyRef Name="UnitPrice" />
+          <PropertyRef Name="Quantity" />
+          <PropertyRef Name="Discount" />
+        </Key>
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="Quantity" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Discount" Type="Edm.Single" Nullable="false" />
+        <Property Name="ExtendedPrice" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="Order_Subtotal">
+        <Key>
+          <PropertyRef Name="OrderID" />
+        </Key>
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Subtotal" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="Orders_Qry">
+        <Key>
+          <PropertyRef Name="OrderID" />
+          <PropertyRef Name="CompanyName" />
+        </Key>
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CustomerID" Type="Edm.String" />
+        <Property Name="EmployeeID" Type="Edm.Int32" />
+        <Property Name="OrderDate" Type="Edm.DateTime" />
+        <Property Name="RequiredDate" Type="Edm.DateTime" />
+        <Property Name="ShippedDate" Type="Edm.DateTime" />
+        <Property Name="ShipVia" Type="Edm.Int32" />
+        <Property Name="Freight" Type="Edm.Decimal" />
+        <Property Name="ShipName" Type="Edm.String" />
+        <Property Name="ShipAddress" Type="Edm.String" />
+        <Property Name="ShipCity" Type="Edm.String" />
+        <Property Name="ShipRegion" Type="Edm.String" />
+        <Property Name="ShipPostalCode" Type="Edm.String" />
+        <Property Name="ShipCountry" Type="Edm.String" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="Product_Sales_for_1997">
+        <Key>
+          <PropertyRef Name="CategoryName" />
+          <PropertyRef Name="ProductName" />
+        </Key>
+        <Property Name="CategoryName" Type="Edm.String" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+        <Property Name="ProductSales" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="Products_Above_Average_Price">
+        <Key>
+          <PropertyRef Name="ProductName" />
+        </Key>
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="Products_by_Category">
+        <Key>
+          <PropertyRef Name="CategoryName" />
+          <PropertyRef Name="ProductName" />
+          <PropertyRef Name="Discontinued" />
+        </Key>
+        <Property Name="CategoryName" Type="Edm.String" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+        <Property Name="QuantityPerUnit" Type="Edm.String" />
+        <Property Name="UnitsInStock" Type="Edm.Int16" />
+        <Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Sales_by_Category">
+        <Key>
+          <PropertyRef Name="CategoryID" />
+          <PropertyRef Name="CategoryName" />
+          <PropertyRef Name="ProductName" />
+        </Key>
+        <Property Name="CategoryID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CategoryName" Type="Edm.String" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+        <Property Name="ProductSales" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="Sales_Totals_by_Amount">
+        <Key>
+          <PropertyRef Name="OrderID" />
+          <PropertyRef Name="CompanyName" />
+        </Key>
+        <Property Name="SaleAmount" Type="Edm.Decimal" />
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="ShippedDate" Type="Edm.DateTime" />
+      </EntityType>
+      <EntityType Name="Summary_of_Sales_by_Quarter">
+        <Key>
+          <PropertyRef Name="OrderID" />
+        </Key>
+        <Property Name="ShippedDate" Type="Edm.DateTime" />
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Subtotal" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="Summary_of_Sales_by_Year">
+        <Key>
+          <PropertyRef Name="OrderID" />
+        </Key>
+        <Property Name="ShippedDate" Type="Edm.DateTime" />
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Subtotal" Type="Edm.Decimal" />
+      </EntityType>
+      <Association Name="Category_Products">
+        <End Type="ODataRelay.PublicNorthwind.Product" Role="Products" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Category" Role="Category" Multiplicity="*" />
+      </Association>
+      <Association Name="CustomerDemographic_Customers">
+        <End Type="ODataRelay.PublicNorthwind.CustomerDemographic" Role="CustomerDemographic" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Customer" Role="Customers" Multiplicity="*" />
+      </Association>
+      <Association Name="Customer_Orders">
+        <End Type="ODataRelay.PublicNorthwind.Order" Role="Orders" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Customer" Role="Customer" Multiplicity="*" />
+      </Association>
+      <Association Name="Customer_CustomerDemographics">
+        <End Type="ODataRelay.PublicNorthwind.CustomerDemographic" Role="CustomerDemographics" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Customer" Role="Customer" Multiplicity="*" />
+      </Association>
+      <Association Name="Employee_Employees1">
+        <End Type="ODataRelay.PublicNorthwind.Employee" Role="Employees1" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Employee" Role="Employee" Multiplicity="*" />
+      </Association>
+      <Association Name="Employee_Employee1">
+        <End Type="ODataRelay.PublicNorthwind.Employee" Role="Employee1" Multiplicity="0..1" />
+        <End Type="ODataRelay.PublicNorthwind.Employee" Role="Employee" Multiplicity="*" />
+      </Association>
+      <Association Name="Employee_Orders">
+        <End Type="ODataRelay.PublicNorthwind.Order" Role="Orders" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Employee" Role="Employee" Multiplicity="*" />
+      </Association>
+      <Association Name="Employee_Territories">
+        <End Type="ODataRelay.PublicNorthwind.Territory" Role="Territories" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Employee" Role="Employee" Multiplicity="*" />
+      </Association>
+      <Association Name="Order_Detail_Order">
+        <End Type="ODataRelay.PublicNorthwind.Order_Detail" Role="Order_Detail" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Order" Role="Order" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Order_Detail_Product">
+        <End Type="ODataRelay.PublicNorthwind.Product" Role="Product" Multiplicity="0..1" />
+        <End Type="ODataRelay.PublicNorthwind.Order_Detail" Role="Order_Detail" Multiplicity="*" />
+      </Association>
+      <Association Name="Order_Customer">
+        <End Type="ODataRelay.PublicNorthwind.Order" Role="Order" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Customer" Role="Customer" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Order_Employee">
+        <End Type="ODataRelay.PublicNorthwind.Order" Role="Order" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Employee" Role="Employee" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Order_Order_Details">
+        <End Type="ODataRelay.PublicNorthwind.Order_Detail" Role="Order_Details" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Order" Role="Order" Multiplicity="*" />
+      </Association>
+      <Association Name="Order_Shipper">
+        <End Type="ODataRelay.PublicNorthwind.Shipper" Role="Shipper" Multiplicity="0..1" />
+        <End Type="ODataRelay.PublicNorthwind.Order" Role="Order" Multiplicity="*" />
+      </Association>
+      <Association Name="Product_Category">
+        <End Type="ODataRelay.PublicNorthwind.Product" Role="Product" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Category" Role="Category" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Product_Order_Details">
+        <End Type="ODataRelay.PublicNorthwind.Product" Role="Product" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Order_Detail" Role="Order_Details" Multiplicity="*" />
+      </Association>
+      <Association Name="Product_Supplier">
+        <End Type="ODataRelay.PublicNorthwind.Supplier" Role="Supplier" Multiplicity="0..1" />
+        <End Type="ODataRelay.PublicNorthwind.Product" Role="Product" Multiplicity="*" />
+      </Association>
+      <Association Name="Region_Territories">
+        <End Type="ODataRelay.PublicNorthwind.Territory" Role="Territories" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Region" Role="Region" Multiplicity="*" />
+      </Association>
+      <Association Name="Shipper_Orders">
+        <End Type="ODataRelay.PublicNorthwind.Shipper" Role="Shipper" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Order" Role="Orders" Multiplicity="*" />
+      </Association>
+      <Association Name="Supplier_Products">
+        <End Type="ODataRelay.PublicNorthwind.Supplier" Role="Supplier" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Product" Role="Products" Multiplicity="*" />
+      </Association>
+      <Association Name="Territory_Region">
+        <End Type="ODataRelay.PublicNorthwind.Territory" Role="Territory" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Region" Role="Region" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Territory_Employees">
+        <End Type="ODataRelay.PublicNorthwind.Territory" Role="Territory" Multiplicity="*" />
+        <End Type="ODataRelay.PublicNorthwind.Employee" Role="Employees" Multiplicity="*" />
+      </Association>
+      <EntityContainer Name="NorthwindEntities" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Categories" EntityType="ODataRelay.PublicNorthwind.Category" />
+        <EntitySet Name="CustomerDemographics" EntityType="ODataRelay.PublicNorthwind.CustomerDemographic" />
+        <EntitySet Name="Customers" EntityType="ODataRelay.PublicNorthwind.Customer" />
+        <EntitySet Name="Employees" EntityType="ODataRelay.PublicNorthwind.Employee" />
+        <EntitySet Name="Order_Details" EntityType="ODataRelay.PublicNorthwind.Order_Detail" />
+        <EntitySet Name="Orders" EntityType="ODataRelay.PublicNorthwind.Order" />
+        <EntitySet Name="Products" EntityType="ODataRelay.PublicNorthwind.Product" />
+        <EntitySet Name="Regions" EntityType="ODataRelay.PublicNorthwind.Region" />
+        <EntitySet Name="Shippers" EntityType="ODataRelay.PublicNorthwind.Shipper" />
+        <EntitySet Name="Suppliers" EntityType="ODataRelay.PublicNorthwind.Supplier" />
+        <EntitySet Name="Territories" EntityType="ODataRelay.PublicNorthwind.Territory" />
+        <EntitySet Name="Alphabetical_list_of_products" EntityType="ODataRelay.PublicNorthwind.Alphabetical_list_of_product" />
+        <EntitySet Name="Category_Sales_for_1997" EntityType="ODataRelay.PublicNorthwind.Category_Sales_for_1997" />
+        <EntitySet Name="Current_Product_Lists" EntityType="ODataRelay.PublicNorthwind.Current_Product_List" />
+        <EntitySet Name="Customer_and_Suppliers_by_Cities" EntityType="ODataRelay.PublicNorthwind.Customer_and_Suppliers_by_City" />
+        <EntitySet Name="Invoices" EntityType="ODataRelay.PublicNorthwind.Invoice" />
+        <EntitySet Name="Order_Details_Extendeds" EntityType="ODataRelay.PublicNorthwind.Order_Details_Extended" />
+        <EntitySet Name="Order_Subtotals" EntityType="ODataRelay.PublicNorthwind.Order_Subtotal" />
+        <EntitySet Name="Orders_Qries" EntityType="ODataRelay.PublicNorthwind.Orders_Qry" />
+        <EntitySet Name="Product_Sales_for_1997" EntityType="ODataRelay.PublicNorthwind.Product_Sales_for_1997" />
+        <EntitySet Name="Products_Above_Average_Prices" EntityType="ODataRelay.PublicNorthwind.Products_Above_Average_Price" />
+        <EntitySet Name="Products_by_Categories" EntityType="ODataRelay.PublicNorthwind.Products_by_Category" />
+        <EntitySet Name="Sales_by_Categories" EntityType="ODataRelay.PublicNorthwind.Sales_by_Category" />
+        <EntitySet Name="Sales_Totals_by_Amounts" EntityType="ODataRelay.PublicNorthwind.Sales_Totals_by_Amount" />
+        <EntitySet Name="Summary_of_Sales_by_Quarters" EntityType="ODataRelay.PublicNorthwind.Summary_of_Sales_by_Quarter" />
+        <EntitySet Name="Summary_of_Sales_by_Years" EntityType="ODataRelay.PublicNorthwind.Summary_of_Sales_by_Year" />
+        <AssociationSet Name="Category_Products" Association="ODataRelay.PublicNorthwind.Category_Products">
+          <End Role="Category" EntitySet="Categories" />
+          <End Role="Products" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="CustomerDemographic_Customers" Association="ODataRelay.PublicNorthwind.CustomerDemographic_Customers">
+          <End Role="CustomerDemographic" EntitySet="CustomerDemographics" />
+          <End Role="Customers" EntitySet="Customers" />
+        </AssociationSet>
+        <AssociationSet Name="Customer_Orders" Association="ODataRelay.PublicNorthwind.Customer_Orders">
+          <End Role="Customer" EntitySet="Customers" />
+          <End Role="Orders" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="Customer_CustomerDemographics" Association="ODataRelay.PublicNorthwind.Customer_CustomerDemographics">
+          <End Role="Customer" EntitySet="Customers" />
+          <End Role="CustomerDemographics" EntitySet="CustomerDemographics" />
+        </AssociationSet>
+        <AssociationSet Name="Employee_Employees1" Association="ODataRelay.PublicNorthwind.Employee_Employees1">
+          <End Role="Employee" EntitySet="Employees" />
+          <End Role="Employees1" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="Employee_Employee1" Association="ODataRelay.PublicNorthwind.Employee_Employee1">
+          <End Role="Employee" EntitySet="Employees" />
+          <End Role="Employee1" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="Employee_Orders" Association="ODataRelay.PublicNorthwind.Employee_Orders">
+          <End Role="Employee" EntitySet="Employees" />
+          <End Role="Orders" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="Employee_Territories" Association="ODataRelay.PublicNorthwind.Employee_Territories">
+          <End Role="Employee" EntitySet="Employees" />
+          <End Role="Territories" EntitySet="Territories" />
+        </AssociationSet>
+        <AssociationSet Name="Order_Detail_Order" Association="ODataRelay.PublicNorthwind.Order_Detail_Order">
+          <End Role="Order_Detail" EntitySet="Order_Details" />
+          <End Role="Order" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="Order_Detail_Product" Association="ODataRelay.PublicNorthwind.Order_Detail_Product">
+          <End Role="Order_Detail" EntitySet="Order_Details" />
+          <End Role="Product" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="Order_Customer" Association="ODataRelay.PublicNorthwind.Order_Customer">
+          <End Role="Order" EntitySet="Orders" />
+          <End Role="Customer" EntitySet="Customers" />
+        </AssociationSet>
+        <AssociationSet Name="Order_Employee" Association="ODataRelay.PublicNorthwind.Order_Employee">
+          <End Role="Order" EntitySet="Orders" />
+          <End Role="Employee" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="Order_Order_Details" Association="ODataRelay.PublicNorthwind.Order_Order_Details">
+          <End Role="Order" EntitySet="Orders" />
+          <End Role="Order_Details" EntitySet="Order_Details" />
+        </AssociationSet>
+        <AssociationSet Name="Order_Shipper" Association="ODataRelay.PublicNorthwind.Order_Shipper">
+          <End Role="Order" EntitySet="Orders" />
+          <End Role="Shipper" EntitySet="Shippers" />
+        </AssociationSet>
+        <AssociationSet Name="Product_Category" Association="ODataRelay.PublicNorthwind.Product_Category">
+          <End Role="Product" EntitySet="Products" />
+          <End Role="Category" EntitySet="Categories" />
+        </AssociationSet>
+        <AssociationSet Name="Product_Order_Details" Association="ODataRelay.PublicNorthwind.Product_Order_Details">
+          <End Role="Product" EntitySet="Products" />
+          <End Role="Order_Details" EntitySet="Order_Details" />
+        </AssociationSet>
+        <AssociationSet Name="Product_Supplier" Association="ODataRelay.PublicNorthwind.Product_Supplier">
+          <End Role="Product" EntitySet="Products" />
+          <End Role="Supplier" EntitySet="Suppliers" />
+        </AssociationSet>
+        <AssociationSet Name="Region_Territories" Association="ODataRelay.PublicNorthwind.Region_Territories">
+          <End Role="Region" EntitySet="Regions" />
+          <End Role="Territories" EntitySet="Territories" />
+        </AssociationSet>
+        <AssociationSet Name="Shipper_Orders" Association="ODataRelay.PublicNorthwind.Shipper_Orders">
+          <End Role="Shipper" EntitySet="Shippers" />
+          <End Role="Orders" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="Supplier_Products" Association="ODataRelay.PublicNorthwind.Supplier_Products">
+          <End Role="Supplier" EntitySet="Suppliers" />
+          <End Role="Products" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="Territory_Region" Association="ODataRelay.PublicNorthwind.Territory_Region">
+          <End Role="Territory" EntitySet="Territories" />
+          <End Role="Region" EntitySet="Regions" />
+        </AssociationSet>
+        <AssociationSet Name="Territory_Employees" Association="ODataRelay.PublicNorthwind.Territory_Employees">
+          <End Role="Territory" EntitySet="Territories" />
+          <End Role="Employees" EntitySet="Employees" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
