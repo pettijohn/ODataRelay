@@ -16,7 +16,7 @@ namespace ODataRelay
 
     //TRAVIS: added attribute to see stack trace
     [System.ServiceModel.ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-    public class MyNorthwindService : DataService<PublicNorthwind.NorthwindEntities>, IUpdatable
+    public class MyNorthwindService : DataService<PublicNorthwind.NorthwindEntities>//, IUpdatable
     {
         // This method is called only once to initialize service-wide policies.
         public static void InitializeService(DataServiceConfiguration config)
@@ -33,7 +33,7 @@ namespace ODataRelay
             var x = args.OperationContext.RequestHeaders["X-CSRF-Token"];
             base.OnStartProcessingRequest(args);
         }
-
+        /*
         public void AddReferenceToCollection(object targetResource, string propertyName, object resourceToBeAdded)
         {
             throw new NotImplementedException();
@@ -96,5 +96,6 @@ namespace ODataRelay
         {
             throw new NotImplementedException();
         }
+         */
     }
 }
