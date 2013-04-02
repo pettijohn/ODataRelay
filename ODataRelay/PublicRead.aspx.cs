@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ODataRelay.PublicNorthwind;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,13 @@ namespace ODataRelay
                      select customer).Take(10);
             this.customers.DataSource = customers;
             this.customers.DataBind();
+        }
+
+        protected void myButton_Click(object sender, EventArgs e)
+        {
+            var svc = new PublicNorthwind.NorthwindEntities(new Uri("http://services.odata.org/Northwind/Northwind.svc/"));
+            svc.AddToCustomers(Customer.CreateCustomer("1234", "My Company"));
+            svc.SaveChanges();
         }
     }
 }

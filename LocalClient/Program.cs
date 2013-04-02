@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocalClient.NorthwindRelay;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,10 @@ namespace LocalClient
             {
                 Console.WriteLine(customer.ContactName);
             }
+
+            //INSERT
+            svc.AddToCustomers(Customer.CreateCustomer("1234"));
+            svc.SaveChanges();
         }
     }
 }

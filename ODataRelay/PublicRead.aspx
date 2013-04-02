@@ -11,6 +11,9 @@
     <div>
         <asp:GridView runat="server" ID="customers"></asp:GridView>
     </div>
+    <div>
+        <asp:Button ID="myButton" runat="server" Text="Click Me to Insert" OnClick="myButton_Click" />
+    </div>
     </form>
 </body>
 </html>
