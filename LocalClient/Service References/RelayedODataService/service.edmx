@@ -1,0 +1,112 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices m:DataServiceVersion="3.0" m:MaxDataServiceVersion="3.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="ODataRelay.ODataReadWrite" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityType Name="Product">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" m:FC_TargetPath="SyndicationTitle" m:FC_ContentKind="text" m:FC_KeepInContent="false" />
+        <Property Name="Description" Type="Edm.String" m:FC_TargetPath="SyndicationSummary" m:FC_ContentKind="text" m:FC_KeepInContent="false" />
+        <Property Name="ReleaseDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="DiscontinuedDate" Type="Edm.DateTime" />
+        <Property Name="Rating" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Price" Type="Edm.Decimal" Nullable="false" />
+        <NavigationProperty Name="Category" Relationship="ODataRelay.ODataReadWrite.Product_Category" ToRole="Category" FromRole="Product" />
+        <NavigationProperty Name="Supplier" Relationship="ODataRelay.ODataReadWrite.Product_Supplier" ToRole="Supplier" FromRole="Product" />
+      </EntityType>
+      <EntityType Name="FeaturedProduct" BaseType="ODataRelay.ODataReadWrite.Product">
+        <NavigationProperty Name="Advertisement" Relationship="ODataRelay.ODataReadWrite.FeaturedProduct_Advertisement" ToRole="Advertisement" FromRole="FeaturedProduct" />
+      </EntityType>
+      <EntityType Name="Advertisement">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="AirDate" Type="Edm.DateTime" Nullable="false" />
+        <NavigationProperty Name="FeaturedProduct" Relationship="ODataRelay.ODataReadWrite.Advertisement_FeaturedProduct" ToRole="FeaturedProduct" FromRole="Advertisement" />
+      </EntityType>
+      <EntityType Name="Category">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" m:FC_TargetPath="SyndicationTitle" m:FC_ContentKind="text" m:FC_KeepInContent="true" />
+        <NavigationProperty Name="Products" Relationship="ODataRelay.ODataReadWrite.Category_Products" ToRole="Products" FromRole="Category" />
+      </EntityType>
+      <EntityType Name="Supplier">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" m:FC_TargetPath="SyndicationTitle" m:FC_ContentKind="text" m:FC_KeepInContent="true" />
+        <Property Name="Address" Type="ODataRelay.ODataReadWrite.Address" />
+        <Property Name="Location" Type="Edm.GeographyPoint" SRID="Variable" />
+        <Property Name="Concurrency" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="Products" Relationship="ODataRelay.ODataReadWrite.Supplier_Products" ToRole="Products" FromRole="Supplier" />
+      </EntityType>
+      <ComplexType Name="Address">
+        <Property Name="Street" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="State" Type="Edm.String" />
+        <Property Name="ZipCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+      </ComplexType>
+      <Association Name="Product_Category">
+        <End Type="ODataRelay.ODataReadWrite.Product" Role="Product" Multiplicity="*" />
+        <End Type="ODataRelay.ODataReadWrite.Category" Role="Category" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Product_Supplier">
+        <End Type="ODataRelay.ODataReadWrite.Supplier" Role="Supplier" Multiplicity="0..1" />
+        <End Type="ODataRelay.ODataReadWrite.Product" Role="Product" Multiplicity="*" />
+      </Association>
+      <Association Name="FeaturedProduct_Advertisement">
+        <End Type="ODataRelay.ODataReadWrite.FeaturedProduct" Role="FeaturedProduct" Multiplicity="*" />
+        <End Type="ODataRelay.ODataReadWrite.Advertisement" Role="Advertisement" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Advertisement_FeaturedProduct">
+        <End Type="ODataRelay.ODataReadWrite.FeaturedProduct" Role="FeaturedProduct" Multiplicity="0..1" />
+        <End Type="ODataRelay.ODataReadWrite.Advertisement" Role="Advertisement" Multiplicity="*" />
+      </Association>
+      <Association Name="Category_Products">
+        <End Type="ODataRelay.ODataReadWrite.Product" Role="Products" Multiplicity="*" />
+        <End Type="ODataRelay.ODataReadWrite.Category" Role="Category" Multiplicity="*" />
+      </Association>
+      <Association Name="Supplier_Products">
+        <End Type="ODataRelay.ODataReadWrite.Supplier" Role="Supplier" Multiplicity="*" />
+        <End Type="ODataRelay.ODataReadWrite.Product" Role="Products" Multiplicity="*" />
+      </Association>
+      <EntityContainer Name="DemoService" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Products" EntityType="ODataRelay.ODataReadWrite.Product" />
+        <EntitySet Name="Advertisements" EntityType="ODataRelay.ODataReadWrite.Advertisement" />
+        <EntitySet Name="Categories" EntityType="ODataRelay.ODataReadWrite.Category" />
+        <EntitySet Name="Suppliers" EntityType="ODataRelay.ODataReadWrite.Supplier" />
+        <AssociationSet Name="FeaturedProduct_Advertisement" Association="ODataRelay.ODataReadWrite.FeaturedProduct_Advertisement">
+          <End Role="FeaturedProduct" EntitySet="Products" />
+          <End Role="Advertisement" EntitySet="Advertisements" />
+        </AssociationSet>
+        <AssociationSet Name="Product_Category" Association="ODataRelay.ODataReadWrite.Product_Category">
+          <End Role="Product" EntitySet="Products" />
+          <End Role="Category" EntitySet="Categories" />
+        </AssociationSet>
+        <AssociationSet Name="Product_Supplier" Association="ODataRelay.ODataReadWrite.Product_Supplier">
+          <End Role="Product" EntitySet="Products" />
+          <End Role="Supplier" EntitySet="Suppliers" />
+        </AssociationSet>
+        <AssociationSet Name="Advertisement_FeaturedProduct" Association="ODataRelay.ODataReadWrite.Advertisement_FeaturedProduct">
+          <End Role="Advertisement" EntitySet="Advertisements" />
+          <End Role="FeaturedProduct" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="Category_Products" Association="ODataRelay.ODataReadWrite.Category_Products">
+          <End Role="Category" EntitySet="Categories" />
+          <End Role="Products" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="Supplier_Products" Association="ODataRelay.ODataReadWrite.Supplier_Products">
+          <End Role="Supplier" EntitySet="Suppliers" />
+          <End Role="Products" EntitySet="Products" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

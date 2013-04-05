@@ -81,19 +81,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MyNorthwindService.svc" />
+    <Content Include="MyODataService.svc" />
     <Content Include="PublicRead.aspx" />
-    <Content Include="Service References\PublicNorthwind\Reference.datasvcmap">
+    <Content Include="Service References\ODataReadWrite\Reference.datasvcmap">
       <Generator>DataServicesCoreClientGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyNorthwindService.svc.cs">
-      <DependentUpon>MyNorthwindService.svc</DependentUpon>
+    <Compile Include="DemoService_Extended.cs" />
+    <Compile Include="MyODataService.svc.cs">
+      <DependentUpon>MyODataService.svc</DependentUpon>
     </Compile>
-    <Compile Include="NorthwindEntities_Extended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicRead.aspx.cs">
       <DependentUpon>PublicRead.aspx</DependentUpon>
@@ -102,7 +102,7 @@
     <Compile Include="PublicRead.aspx.designer.cs">
       <DependentUpon>PublicRead.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Service References\PublicNorthwind\Reference.cs">
+    <Compile Include="Service References\ODataReadWrite\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.datasvcmap</DependentUpon>
@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Service References\PublicNorthwind\service.edmx" />
+    <Content Include="Service References\ODataReadWrite\service.edmx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -122,7 +122,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ServiceReferenceMetadataStorage Include="Service References\PublicNorthwind\">
+    <ServiceReferenceMetadataStorage Include="Service References\ODataReadWrite\">
       <Type>datasvcmap</Type>
     </ServiceReferenceMetadataStorage>
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿using LocalClient.NorthwindRelay;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,19 +10,17 @@ namespace LocalClient
     {
         static void Main(string[] args)
         {
-            var svc = new NorthwindRelay.NorthwindEntities(new Uri("http://localhost:63653/MyNorthwindService.svc/"));
+            var svc = new RelayedODataService.DemoService(new Uri("http://localhost:63653/MyODataService.svc/"));
 
-            var customers = (from customer in svc.Customers
-                             select customer).Take(10);
+            var products = (from prod in svc.Products
+                            select prod);
 
-            foreach (var customer in customers)
+            foreach (var prod in products)
             {
-                Console.WriteLine(customer.ContactName);
+                Console.WriteLine(prod.Name);
             }
-
-            //INSERT
-            svc.AddToCustomers(Customer.CreateCustomer("1234"));
-            svc.SaveChanges();
+        
+        
         }
     }
 }
