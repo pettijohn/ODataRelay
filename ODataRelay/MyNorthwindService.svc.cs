@@ -24,14 +24,20 @@ namespace ODataRelay
             // TODO: set rules to indicate which entity sets and service operations are visible, updatable, etc.
             // Examples:
             config.SetEntitySetAccessRule("*", EntitySetRights.All);
-            // config.SetServiceOperationAccessRule("MyServiceOperation", ServiceOperationRights.All);
+            config.SetServiceOperationAccessRule("Login", ServiceOperationRights.All);
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
         }
 
-        protected override void OnStartProcessingRequest(ProcessRequestArgs args)
+        //protected override void OnStartProcessingRequest(ProcessRequestArgs args)
+        //{
+        //    var x = args.OperationContext.RequestHeaders["X-CSRF-Token"];
+        //    base.OnStartProcessingRequest(args);
+        //}
+
+        [WebGet]
+        public LoginResult Login(string userID, string password)
         {
-            var x = args.OperationContext.RequestHeaders["X-CSRF-Token"];
-            base.OnStartProcessingRequest(args);
+            return new LoginResult();
         }
         /*
         public void AddReferenceToCollection(object targetResource, string propertyName, object resourceToBeAdded)
