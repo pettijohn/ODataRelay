@@ -11,7 +11,7 @@ namespace LocalClient
     {
         static void Main(string[] args)
         {
-            var svc = new NorthwindRelay.NorthwindEntities(new Uri("http://localhost:63653/MyNorthwindService.svc/"));
+            var svc = new NorthwindRelay.NorthwindEntities(new Uri("https://webservicerelay.servicebus.windows.net/northwindrelay"));
 
             var customers = (from customer in svc.Customers
                              select customer).Take(10);
@@ -20,10 +20,8 @@ namespace LocalClient
             {
                 Console.WriteLine(customer.ContactName);
             }
-
-            //INSERT
-            svc.AddToCustomers(Customer.CreateCustomer("1234"));
-            svc.SaveChanges();
+            Console.WriteLine("Press Enter to exit.");
+            Console.ReadLine();
         }
     }
 }
