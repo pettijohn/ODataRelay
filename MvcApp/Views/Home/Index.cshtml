@@ -45,7 +45,7 @@
         <li><a href="#" onclick="readData('http://services.odata.org/Northwind/Northwind.svc/Customers()?$top=10');">Get top ten customers from the source</a></li>
         <li><a href="#" onclick="readData('/MyNorthwindService.svc/Customers()?$top=10');">Get top ten customers from local WCF Data Service relay of the above</a></li>
         <li><a href="#" onclick="readData('https://webservicerelay.servicebus.windows.net/northwindrelay/Customers/?$top=10')">Get top ten customers from the local relay service <i>re-published</i> on Service Bus</a> (had to downgrade service version to 1.0 from 3.0)</li>
-        <li><a href="#" onclick="readData('/odata/Customers()?$top=10')">Get top ten customers from the local Web API relay of the service bus endpoint</li>
+        <li><a href="#" onclick="readData('/odata/Customers()?$top=10')">Get top ten customers from the local Web API relay of the service bus endpoint</a></li>
     </ol>
 
     <div>Loading from <span id="via"></span></div>

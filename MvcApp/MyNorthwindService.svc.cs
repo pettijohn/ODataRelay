@@ -28,11 +28,13 @@ namespace MvcApp
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V1;
         }
 
-        //protected override void OnStartProcessingRequest(ProcessRequestArgs args)
-        //{
-        //    var x = args.OperationContext.RequestHeaders["X-CSRF-Token"];
-        //    base.OnStartProcessingRequest(args);
-        //}
+        string _passThrough;
+
+        protected override void OnStartProcessingRequest(ProcessRequestArgs args)
+        {
+            _passThrough = args.OperationContext.RequestHeaders["X-PassThrough"];
+            args.OperationContext.ResponseHeaders["X-PassThrough"] = _passThrough;
+        }
 
         //[WebGet]
         //public LoginResult Login(string userID, string password)

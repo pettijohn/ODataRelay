@@ -10,31 +10,36 @@ using System.Web.Http.OData;
 
 namespace MvcApp.Controllers
 {
-    public class CustomersController : EntitySetController<PublicODataDirect.Customer, string>
+    public class CustomersController : EntitySetController<ServiceBusOData.Customer, string>
     {
         public CustomersController()
         {
-            _context = new PublicODataDirect.NorthwindEntities(new Uri("http://services.odata.org/Northwind/Northwind.svc/"));
-            _knownUser = KnownUser.FromClaims(((ClaimsPrincipal)User).Claims);
+            _context = new ServiceBusOData.NorthwindEntities(new Uri("https://webservicerelay.servicebus.windows.net/northwindrelay/"));
+            //_knownUser = KnownUser.FromClaims(((ClaimsPrincipal)User).Claims);
             _context.BuildingRequest += _context_BuildingRequest;
+            _context.ReceivingResponse += _context_ReceivingResponse;
         }
 
-        PublicODataDirect.NorthwindEntities _context;
+        void _context_ReceivingResponse(object sender, System.Data.Services.Client.ReceivingResponseEventArgs e)
+        {
+            var value = e.ResponseMessage.Headers.Where(h => h.Key == "X-PassThrough").First().Value;
+        }
+
+        ServiceBusOData.NorthwindEntities _context;
         KnownUser _knownUser;
 
 
         void _context_BuildingRequest(object sender, System.Data.Services.Client.BuildingRequestEventArgs e)
         {
-            e.Headers.Add("ClaimProvider", _knownUser.Provider);
-            e.Headers.Add("ClaimNameIdentifier", _knownUser.NameIdentifier);
+            e.Headers.Add("X-PassThrough", "Downstream");
         }
-        
-        protected override PublicODataDirect.Customer GetEntityByKey(string key)
+
+        protected override ServiceBusOData.Customer GetEntityByKey(string key)
         {
             return (from c in _context.Customers where c.CustomerID == key select c).FirstOrDefault();
         }
 
-        public override IQueryable<PublicODataDirect.Customer> Get()
+        public override IQueryable<ServiceBusOData.Customer> Get()
         {
             return _context.Customers;
         }

@@ -21,10 +21,10 @@ namespace MvcApp
             );
 
             ODataModelBuilder modelBuilder = new ODataConventionModelBuilder();
-            modelBuilder.EntitySet<PublicODataDirect.Customer>("Customers");
-            modelBuilder.EntitySet<PublicODataDirect.Order>("Orders");
-            modelBuilder.EntitySet<PublicODataDirect.Order_Detail>("Order_Details");
-            modelBuilder.EntitySet<PublicODataDirect.CustomerDemographic>("CustomerDemographics");
+            modelBuilder.EntitySet<ServiceBusOData.Customer>("Customers");
+            modelBuilder.EntitySet<ServiceBusOData.Order>("Orders");
+            modelBuilder.EntitySet<ServiceBusOData.Order_Detail>("Order_Details");
+            modelBuilder.EntitySet<ServiceBusOData.CustomerDemographic>("CustomerDemographics");
 
             Microsoft.Data.Edm.IEdmModel model = modelBuilder.GetEdmModel();
             config.Routes.MapODataRoute("ODataRoute", "odata", model);
