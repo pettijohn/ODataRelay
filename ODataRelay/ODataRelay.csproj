@@ -90,10 +90,10 @@
   <ItemGroup>
     <Content Include="MyNorthwindService.svc" />
     <Content Include="PublicRead.aspx" />
-    <Content Include="Service References\PublicNorthwind\Reference.datasvcmap">
+    <None Include="Service References\PublicNorthwind\Reference.datasvcmap">
       <Generator>DataServicesCoreClientGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -120,7 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Service References\PublicNorthwind\service.edmx" />
+    <None Include="Service References\PublicNorthwind\service.edmx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
