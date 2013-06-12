@@ -115,6 +115,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Identity\GoogleUser.cs" />
+    <Compile Include="Identity\MicrosoftUser.cs" />
+    <Compile Include="Identity\KnownUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

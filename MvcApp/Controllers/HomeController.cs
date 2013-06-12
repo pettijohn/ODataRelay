@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvcApp.Identity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,7 +19,8 @@ namespace MvcApp.Controllers
         public ActionResult Index()
         {
             var claimedUser = (ClaimsPrincipal)User;
-            ViewData["claims"] = claimedUser.Claims.ToArray();
+            ViewBag.Claims = claimedUser.Claims.ToArray();
+            ViewBag.User = KnownUser.FromClaims(claimedUser.Claims);
 
             return View();
         }
