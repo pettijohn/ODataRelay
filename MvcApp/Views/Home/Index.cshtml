@@ -16,7 +16,7 @@
         OData.defaultHttpClient.enableJsonpCallback = true;
 
         function readData(uri) {
-            $("#via").text(uri);
+            $("#via").html("<a href='"+uri+"'>"+uri+"</a>");
             $("#results").html("");
 
             OData.read(
@@ -30,7 +30,6 @@
                   html += "</ol>";
 
                   $("#results").html(html);
-                  //$(html).appendTo($("#results"));
               }
             );
         }
@@ -38,6 +37,14 @@
     </script>
 </head>
 <body>
+    <h1>Welcome</h1>
+    <p>@ViewBag.User.NameIdentifier, you signed in with @ViewBag.User.Provider</p>
+    @*<ul>
+        @foreach (var claim in (IEnumerable<Claim>)ViewBag.Claims)
+        {
+            <li><b>@claim.Type</b> / <i>@claim.Value</i></li>
+        }
+    </ul>*@
     <h1>Howto</h1>
     <ol>
         <li>You are visiting an anonymous page now.</li>
@@ -52,13 +59,6 @@
     <div id="results">
 
     </div>
-    @*<h1>Welcome</h1>
-    <p>@ViewBag.User.NameIdentifier, you signed in with @ViewBag.User.Provider</p>
-    <ul>
-        @foreach (var claim in (IEnumerable<Claim>)ViewBag.Claims)
-        {
-            <li><b>@claim.Type</b> / <i>@claim.Value</i></li>
-        }
-    </ul>*@
+    
 </body>
 </html>

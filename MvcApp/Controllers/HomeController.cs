@@ -18,9 +18,9 @@ namespace MvcApp.Controllers
 
         public ActionResult Index()
         {
-            //var claimedUser = (ClaimsPrincipal)User;
-            //ViewBag.Claims = claimedUser.Claims.ToArray();
-            //ViewBag.User = KnownUser.FromClaims(claimedUser.Claims);
+            var claimedUser = (ClaimsPrincipal)User;
+            ViewBag.Claims = claimedUser.Claims.ToArray();
+            ViewBag.User = KnownUser.FromClaims(claimedUser.Claims);
 
             return View();
         }
