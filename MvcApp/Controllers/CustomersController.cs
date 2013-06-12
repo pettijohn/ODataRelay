@@ -16,12 +16,19 @@ namespace MvcApp.Controllers
         {
             _context = new PublicODataDirect.NorthwindEntities(new Uri("http://services.odata.org/Northwind/Northwind.svc/"));
             _knownUser = KnownUser.FromClaims(((ClaimsPrincipal)User).Claims);
+            _context.BuildingRequest += _context_BuildingRequest;
         }
 
         PublicODataDirect.NorthwindEntities _context;
         KnownUser _knownUser;
-       
 
+
+        void _context_BuildingRequest(object sender, System.Data.Services.Client.BuildingRequestEventArgs e)
+        {
+            e.Headers.Add("ClaimProvider", _knownUser.Provider);
+            e.Headers.Add("ClaimNameIdentifier", _knownUser.NameIdentifier);
+        }
+        
         protected override PublicODataDirect.Customer GetEntityByKey(string key)
         {
             return (from c in _context.Customers where c.CustomerID == key select c).FirstOrDefault();

@@ -11,13 +11,24 @@
     <title>Index</title>
 </head>
 <body>
-    <h1>Welcome</h1>
+    <h1>Howto</h1>
+    <ol>
+        <li>You are visiting an anonymous page now.</li>
+        <li>Launch Fiddler or F12 or Inspector and watch some network traffic. </li>
+        <li>Get top ten customers from http://services.odata.org/Northwind/Northwind.svc/Customers()?$top=10 » This is the source</li>
+        <li>Get top ten customers from /MyNorthwindService.svc/Customers()?$top=10 » This is a local WCF Data Service relay of the above</li>
+        <li>Get top ten customers from https://webservicerelay.servicebus.windows.net/northwindrelay/Customers/?$top=10 » This is the local relay service re-published on Service Bus</li>
+        <li>Get top ten customers from /odata/Customers()?$top=10 » This is a Web API relay of ...???</li>
+    </ol>
+
+
+    @*<h1>Welcome</h1>
     <p>@ViewBag.User.NameIdentifier, you signed in with @ViewBag.User.Provider</p>
     <ul>
         @foreach (var claim in (IEnumerable<Claim>)ViewBag.Claims)
         {
             <li><b>@claim.Type</b> / <i>@claim.Value</i></li>
         }
-    </ul>
+    </ul>*@
 </body>
 </html>
