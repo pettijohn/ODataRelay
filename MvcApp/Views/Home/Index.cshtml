@@ -9,19 +9,49 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <script type="text/javascript" src="~/Scripts/jquery-2.0.2.js"></script>
+    <script type="text/javascript" src="~/Scripts/datajs-1.1.0.js"></script>
+    <script type="text/javascript">
+
+        OData.defaultHttpClient.enableJsonpCallback = true;
+
+        function readData(uri) {
+            $("#via").text(uri);
+            $("#results").html("");
+
+            OData.read(
+              uri,
+              function (data) {
+                  var html = "<ol>";
+                  //CustomerID CompanyName
+                  $.each(data.results, function (i, v) {
+                      html += "<li>" + v.CompanyName + " / " + v.CustomerID + "</li>";
+                  });
+                  html += "</ol>";
+
+                  $("#results").html(html);
+                  //$(html).appendTo($("#results"));
+              }
+            );
+        }
+
+    </script>
 </head>
 <body>
     <h1>Howto</h1>
     <ol>
         <li>You are visiting an anonymous page now.</li>
         <li>Launch Fiddler or F12 or Inspector and watch some network traffic. </li>
-        <li>Get top ten customers from http://services.odata.org/Northwind/Northwind.svc/Customers()?$top=10 » This is the source</li>
-        <li>Get top ten customers from /MyNorthwindService.svc/Customers()?$top=10 » This is a local WCF Data Service relay of the above</li>
-        <li>Get top ten customers from https://webservicerelay.servicebus.windows.net/northwindrelay/Customers/?$top=10 » This is the local relay service re-published on Service Bus</li>
-        <li>Get top ten customers from /odata/Customers()?$top=10 » This is a Web API relay of ...???</li>
+        <li><a href="#" onclick="readData('http://services.odata.org/Northwind/Northwind.svc/Customers()?$top=10');">Get top ten customers from the source</a></li>
+        <li><a href="#" onclick="readData('/MyNorthwindService.svc/Customers()?$top=10');">Get top ten customers from local WCF Data Service relay of the above</a></li>
+        <li><a href="#" onclick="readData('https://webservicerelay.servicebus.windows.net/northwindrelay/Customers/?$top=10')">Get top ten customers from the local relay service <i>re-published</i> on Service Bus</a> (had to downgrade service version to 1.0 from 3.0)</li>
+        <li><a href="#" onclick="readData('/odata/Customers()?$top=10')">Get top ten customers from the local Web API relay of the service bus endpoint</li>
     </ol>
 
+    <div>Loading from <span id="via"></span></div>
+    <div id="results">
 
+    </div>
     @*<h1>Welcome</h1>
     <p>@ViewBag.User.NameIdentifier, you signed in with @ViewBag.User.Provider</p>
     <ul>

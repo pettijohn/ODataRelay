@@ -25,7 +25,7 @@ namespace MvcApp
             // Examples:
             config.SetEntitySetAccessRule("*", EntitySetRights.All);
             //config.SetServiceOperationAccessRule("Login", ServiceOperationRights.All);
-            config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
+            config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V1;
         }
 
         //protected override void OnStartProcessingRequest(ProcessRequestArgs args)
